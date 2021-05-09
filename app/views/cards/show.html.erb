@@ -1,0 +1,24 @@
+<table class="table table-hover">
+  <thead class="thead-light">
+    <tr>
+      <th>original text</th>
+      <th>translated text</th>
+      <th>review date</th>
+      <th colspan="2">links</th>
+    </tr>
+  </thead>
+  <tr>
+    <td><%= @card.original_text %></td>
+    <td><%= @card.translated_text %></td>
+    <td><%= @card.review_date.strftime("%d %m %Y") if @card.review_date %></td>
+    <td><%= link_to "Edit", edit_card_path(@card) %></td>
+    <td><%= link_to "Delete", card_path(@card),
+                              method: :delete,
+                              data: { confirm: "Are you sure?" } %>
+    </td>
+  </tr>
+</table>
+
+<%= link_to 'back', cards_path %>
+
+<%= %>

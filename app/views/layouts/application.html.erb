@@ -16,12 +16,28 @@
 
   <body>
     <%= render "shared/navbar" %>
-    <div class="container">
-      <div>
-        <p id="notice"><%= flash[:notice] %></p>
-        <p id="alert"><%= flash[:alert] %></p>
-      </div>
-      <%= yield %>
-    </div>
+
+    <section class="container">
+
+      <header class="clearfix">
+        <h1>Флэшкарточкер</h1>
+        <% if current_user %>
+        <ul class="navigation-links">
+          <li><%= link_to "Все карточки", cards_path %></li>
+          <li><%= link_to "Добавить карточку", new_card_path %></li>
+        </ul>
+        <% end  %>
+      </header>
+      <section>
+        <%= yield %>
+      </section>
+      <% unless flash.empty? %>
+        <div class="badge badge-light">
+          <% flash.each do |name, msg| %>
+            <%= content_tag :h1, msg, class: "text-" + name %>
+          <% end %>
+        </div>
+      <% end %>
+    </section>
   </body>
 </html>

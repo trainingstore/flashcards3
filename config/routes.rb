@@ -1,8 +1,17 @@
 Rails.application.routes.draw do
-  root :to => 'users#index'
-  resources :users
+  # resources :user_sessions, only: [:create]
+  resources :users, except: %i[new destroy]
+  get "/signup", to: "users#new" #register
+  get 'login', to: 'user_sessions#new', :as => :login
+  post 'login', to: "user_sessions#create"
+  post 'logout', to: 'user_sessions#destroy', :as => :logout
+  get 'logout', to: 'user_sessions#destroy'
+  root "home#home" #static_pages#home
+  post "/" => "home#check_answer"
+  resources :cards
 
-  get 'login' => 'user_sessions#new', :as => :login
-  post 'login' => "user_sessions#create"
-  post 'logout' => 'user_sessions#destroy', :as => :logout
+  post "oauth/callback" => "oauths#callback"
+  get "oauth/callback" => "oauths#callback" # for use with Github, Facebook
+  get "oauth/:provider" => "oauths#oauth", :as => :auth_at_provider
+
 end

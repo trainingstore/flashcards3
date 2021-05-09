@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  original_text: MyString
+  translated_text: MyString
+  review_date: 2021-05-08
+  picture: MyString
+  belongs_to: 
+
+two:
+  original_text: MyString
+  translated_text: MyString
+  review_date: 2021-05-08
+  picture: MyString
+  belongs_to: 

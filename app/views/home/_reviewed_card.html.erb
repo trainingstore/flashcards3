@@ -1,0 +1,24 @@
+<table class="table">
+  <tbody>
+    <tr>
+      <td class="text-center"><%= @card.original_text %></td>
+    </tr>
+    <tr>
+      <td class="text-center"><%= @card.translated_text %></td>
+    </tr>
+    <tr>
+      <td class="text-center"><%=  @card.picture? ? image_tag(@card.picture.url) : "no picture" %></td>
+    </tr>
+  </tbody>
+</table>
+<%= form_with(controller: "home", action: "check_answer") do |f| %>
+  <%= f.hidden_field :checked_card_id, value: @card.id %>
+  <div class="form-group text-center">
+    <%= f.label :translation %>
+    <%= f.text_field :translation, class: "form-control" %>
+  </div>
+  <div class="form-group text-center">
+    <%= f.submit "Check", class: "btn btn-info btn-lg" %>
+  </div>
+<% end %>
+<%= %>

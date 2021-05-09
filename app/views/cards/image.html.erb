@@ -1,0 +1,20 @@
+<% if card.picture? %>
+  <div class="image_wrapper">
+    <%= image_tag card.picture.url if card.picture? %>
+  </div>
+<% end %>
+<%= form_with model: card do |f| %>
+  <div class="form-group">
+    <%= f.file_field :picture, class: "form-control-file" %>
+  </div>
+  <% if card.picture? %>
+    <div class="form-check">
+      <label class="form-check-label">
+        <%= f.check_box :remove_picture, class: "form-check-input" %>
+        Remove image
+      </label>
+    </div>
+  <% end %>
+  <%= f.submit "Upload", class: "btn btn-primary btn-lg"%>
+<% end %>
+<%= %>
