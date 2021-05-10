@@ -16,7 +16,7 @@ describe 'user signup' do
     expect(page).to have_content 'Account was successfully created'
   end
 
-  context 'after registration user is logged in' do
+  context 'after signup user is logged in' do
     it 'gives access to check translation' do
       visit root_path
       expect(page).to have_content 'no cards for review'
