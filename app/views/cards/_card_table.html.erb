@@ -1,0 +1,27 @@
+<table class="table">
+  <tr>
+    <th>Picture</th>
+    <th>Original</th>
+    <th>Translated</th>
+    <th>Review</th>
+    <th>Deck name</th>
+    <th>Box</th>
+    <th colspan="2"></th>
+  </tr>
+  <%= %>
+  <% @cards.each do |card|  %>
+  <tr>
+    <td>
+      <%= card.picture? ? image_tag(card.picture.thumb.url) : 'no' %>
+    </td>
+    <td><%= card.original_text %></td>
+    <td><%= card.translated_text %></td>
+    <td><%= card.review_date.strftime("%d %m %Y") if card.review_date %></td>
+    <td><%= card.deck.name %></td>
+    <td><%= card.box %></td>
+    <td><%= link_to 'edit', edit_card_path(card) %></td>
+    <td><%= link_to 'destroy', card_path(card), method: :delete,
+                               data: { confirm: 'Are you sure?' }   %></td>
+  </tr>
+  <% end %>
+</table>

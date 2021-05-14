@@ -1,0 +1,10 @@
+<%= form_with(url: "decks/select_current_deck" ) do |f| %>
+  <p class="form-group">
+    <%= f.label :deck_name %>
+    <%= f.collection_select :current_deck_id, current_user.decks, :id, :name,
+        include_blank: "all decks",
+        class: "form-control" %>
+  </p>
+  <%= f.submit "select deck", class: "btn btn-primary form-control" %>
+<% end %>
+<%= %>

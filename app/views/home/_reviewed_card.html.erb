@@ -7,7 +7,7 @@
       <td class="text-center"><%= @card.translated_text %></td>
     </tr>
     <tr>
-      <td class="text-center"><%=  @card.picture? ? image_tag(@card.picture.url) : "no picture" %></td>
+      <td class="text-center"><%=  @card.picture? ? image_tag(@card.picture.url) : 'no picture' %></td>
     </tr>
   </tbody>
 </table>
@@ -18,7 +18,7 @@
     <%= f.text_field :translation, class: "form-control" %>
   </div>
   <div class="form-group text-center">
-    <%= f.submit "Check", class: "btn btn-info btn-lg" %>
+    <%= f.submit "Check", class: "btn btn-info btn-lg form-control" %>
   </div>
 <% end %>
 <%= %>

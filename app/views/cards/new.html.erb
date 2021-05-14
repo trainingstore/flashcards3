@@ -1,5 +1,9 @@
 <h1>New Card</h1>
-<%= render 'card', card: @card %>
-
+<% if current_user.decks.present? && current_deck.present? %>
+  <%= render 'card' %>
+<% else %>
+  <p>Select current deck <%= link_to 'here', decks_path %> or
+     create <%= link_to 'new deck', new_deck_path %></p>
+<% end %>
 <%= link_to 'back', cards_path %>
 <%= %>

@@ -6,9 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-
-
-
 URL = Nokogiri::HTML(URI.open("https://1000mostcommonwords.com/1000-most-common-russian-words/"))
 rows = URL.css(".entry-content > table > tbody > tr")
 rows.shift
@@ -20,10 +17,11 @@ users = %w[user1@mail.com user2@mail.com].map do |email|
                password_confirmation: password
              )
 end
+decks = (1..3).map { |i| users[1].decks.create(name: "deck_#{i}") }
 
 rows.each do |e|
-  card = users[1].cards.create!(original_text: e.css('td')[2].text,
-                                translated_text: e.css('td')[1].text)
+  card = decks[rand(0..2)].cards.create!(original_text: e.css('td')[2].text,
+                                         translated_text: e.css('td')[1].text)
   random_date = Date.today + rand(-3..3)
-  card.update_attribute(:review_date, random_date)
+  card.update(review_date: random_date, box: rand(0..5))
 end

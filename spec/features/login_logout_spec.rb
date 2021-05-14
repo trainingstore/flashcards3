@@ -8,9 +8,9 @@ describe 'user login and logout' do
       visit root_path
     end
 
-    it 'does not have access to create new card' do
-      visit '/cards/new'
-      expect(page).not_to have_button 'Create flashcard'
+    it 'does not have access to create new deck' do
+      visit '/decks/new'
+      expect(page).not_to have_button 'Create Deck'
     end
 
     it 'does not have access to edit profile' do
@@ -18,14 +18,16 @@ describe 'user login and logout' do
     end
 
     context 'it has access to pages after login and does not after logout' do
+      let!(:deck) { create(:deck, user: user) }
+
       before(:each) do
         login(user.email, '1234')
         visit root_path
       end
 
-      it 'has access to create new card' do
-        visit '/cards/new'
-        expect(page).to have_button 'Create flashcard'
+      it 'has access to create new deck' do
+        visit '/decks/new'
+        expect(page).to have_button 'Create Deck'
       end
 
       it 'has access to edit profile' do

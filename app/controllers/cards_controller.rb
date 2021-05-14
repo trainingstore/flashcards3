@@ -2,17 +2,17 @@ class CardsController < ApplicationController
   before_action :set_card, only: %i[edit show update destroy]
 
   def index
-    @cards = user_cards.latest
-    @number = user_cards.for_review.count
+    @cards = current_cards.latest
+    @number = current_cards.for_review.count
   end
 
   def new
-    @card = user_cards.build
+    @card = current_cards.build
   end
 
   def create
-    @card = user_cards.build(card_params)
-
+    selected_deck = current_user.decks.find(params[:card][:deck_id])
+    @card = selected_deck.cards.build(card_params)
     if @card.save
       flash[:success] = 'Card created'
       redirect_to cards_path
@@ -42,10 +42,12 @@ class CardsController < ApplicationController
 
   private
     def card_params
-      params.require(:card).permit(:original_text, :translated_text, :review_date, :picture, :remote_picture_url)
+      params.require(:card).permit(:original_text, :translated_text,
+                                   :review_date, :picture, :remote_picture_url,
+                                   :deck_id)
     end
 
     def set_card
-      @card = user_cards.find(params[:id])
+      @card = Card.find(params[:id])
     end
 end

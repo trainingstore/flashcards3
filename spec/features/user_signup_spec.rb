@@ -25,10 +25,11 @@ describe 'user signup' do
     it 'gives access to all cards' do
       visit root_path
       click_link 'Все карточки'
-      expect(page).to have_content 'original text'
-      expect(page).to have_content 'translated text'
-      expect(page).to have_content 'review date'
-      expect(page).to have_content 'links'
+      expect(page).to have_content 'Picture'
+      expect(page).to have_content 'Original'
+      expect(page).to have_content 'Translated'
+      expect(page).to have_content 'Review'
+      expect(page).to have_content 'Deck name'
     end
 
     it 'gives access to edit profile ' do

@@ -2,10 +2,10 @@ require "rails_helper"
 
 describe 'cheking_answer' do
   let!(:user) { create(:user) }
-  let!(:card) { create(:card, user: user) }
+  let!(:deck) { create(:deck, user: user) }
+  let!(:card) { create(:card, deck: deck) }
 
   before(:each) do
-    card.update_attribute(:review_date, Date.today - 3)
     login(user.email, '1234')
   end
 

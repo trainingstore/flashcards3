@@ -2,16 +2,18 @@ require "rails_helper"
 
 describe 'creating card with picture' do
   let!(:user) { create(:user) }
+  let!(:deck) { create(:deck, user: user) }
 
   before(:each) do
     login(user.email, '1234')
+    user.assign_current_deck(deck.id)
     click_link 'Добавить карточку'
     fill_in('card[original_text]', with: 'test')
     fill_in('card[translated_text]', with: 'тест')
   end
 
   context 'uploading picture by url' do
-    
+
     before(:each) do
       picture_url = 'https://flashcards3.s3-us-west-1.amazonaws.com/uploads/card/picture/360/cf.jpg'
       fill_in('card[remote_picture_url]', with: picture_url)
